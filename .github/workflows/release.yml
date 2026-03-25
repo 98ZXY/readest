@@ -230,9 +230,9 @@ jobs:
 
           pushd src-tauri/gen/android
           # Generate debug keystore for CI builds
-          keytool -genkeypair -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug, OU=Debug, O=Debug, L=Debug, ST=Debug, C=US"
+          keytool -genkeypair -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Debug, OU=Debug, O=Debug, L=Debug, ST=Debug, C=US" -storetype JKS
           echo "=== Debug keystore info ==="
-          keytool -list -v -keystore debug.keystore -storepass android
+          keytool -list -v -keystore debug.keystore -storepass android -storetype JKS
           echo "keyAlias=androiddebugkey" > keystore.properties
           echo "password=android" >> keystore.properties
           echo "storeFile=debug.keystore" >> keystore.properties
