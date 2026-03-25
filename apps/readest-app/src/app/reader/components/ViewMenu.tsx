@@ -294,20 +294,22 @@ const ViewMenu: React.FC<ViewMenuProps> = ({ bookKey, setIsDropdownOpen }) => {
 
       <hr aria-hidden='true' className='border-base-300 my-1' />
 
-      <MenuItem
-        label={
-          !user
-            ? _('Sign in to Sync')
-            : lastSyncTime
-              ? _('Synced at {{time}}', {
-                  time: formatLocaleDateTime(lastSyncTime),
-                })
-              : _('Never synced')
-        }
-        Icon={user ? MdSync : MdSyncProblem}
-        iconClassName={user && viewState?.syncing ? 'animate-reverse-spin' : ''}
-        onClick={handleSync}
-      />
+      {false && (
+        <MenuItem
+          label={
+            !user
+              ? _('Sign in to Sync')
+              : lastSyncTime
+                ? _('Synced at {{time}}', {
+                    time: formatLocaleDateTime(lastSyncTime),
+                  })
+                : _('Never synced')
+          }
+          Icon={user ? MdSync : MdSyncProblem}
+          iconClassName={user && viewState?.syncing ? 'animate-reverse-spin' : ''}
+          onClick={handleSync}
+        />
+      )}
 
       <hr aria-hidden='true' className='border-base-300 my-1' />
 

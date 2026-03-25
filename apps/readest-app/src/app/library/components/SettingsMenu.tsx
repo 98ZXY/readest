@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { PiUserCircle, PiUserCircleCheck, PiGear } from 'react-icons/pi';
+import { PiUserCircleCheck, PiGear } from 'react-icons/pi';
 import { PiSun, PiMoon } from 'react-icons/pi';
 import { TbSunMoon } from 'react-icons/tb';
 import { MdCloudSync, MdSync, MdSyncProblem } from 'react-icons/md';
@@ -84,11 +84,6 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onPullLibrary, setIsDropdow
 
   const downloadReadest = () => {
     window.open(DOWNLOAD_READEST_URL, '_blank');
-    setIsDropdownOpen?.(false);
-  };
-
-  const handleUserLogin = () => {
-    navigateToLogin(router);
     setIsDropdownOpen?.(false);
   };
 
@@ -285,7 +280,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onPullLibrary, setIsDropdow
       )}
       onCancel={() => setIsDropdownOpen?.(false)}
     >
-      {user ? (
+      {false && user && (
         <MenuItem
           label={
             userDisplayName
@@ -343,15 +338,15 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onPullLibrary, setIsDropdow
             <MenuItem label={_('Account')} onClick={handleUserProfile} />
           </ul>
         </MenuItem>
-      ) : (
-        <MenuItem label={_('Sign In')} Icon={PiUserCircle} onClick={handleUserLogin}></MenuItem>
       )}
 
-      <MenuItem
-        label={_('Auto Upload Books to Cloud')}
-        toggled={isAutoUpload}
-        onClick={toggleAutoUploadBooks}
-      />
+      {false && (
+        <MenuItem
+          label={_('Auto Upload Books to Cloud')}
+          toggled={isAutoUpload}
+          onClick={toggleAutoUploadBooks}
+        />
+      )}
 
       {isTauriAppPlatform() && !appService?.isMobile && (
         <MenuItem
@@ -440,14 +435,18 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({ onPullLibrary, setIsDropdow
       {user && userProfilePlan === 'free' && (
         <MenuItem label={_('Upgrade to Readest Premium')} onClick={handleUpgrade} />
       )}
-      {isWebAppPlatform() && <MenuItem label={_('Download Readest')} onClick={downloadReadest} />}
-      <MenuItem label={_('About Readest')} onClick={showAboutReadest} />
-      <MenuItem
-        label={_('Help improve Readest')}
-        description={isTelemetryEnabled ? _('Sharing anonymized statistics') : ''}
-        toggled={isTelemetryEnabled}
-        onClick={toggleTelemetry}
-      />
+      {false && isWebAppPlatform() && (
+        <MenuItem label={_('Download Readest')} onClick={downloadReadest} />
+      )}
+      {false && <MenuItem label={_('About Readest')} onClick={showAboutReadest} />}
+      {false && (
+        <MenuItem
+          label={_('Help improve Readest')}
+          description={isTelemetryEnabled ? _('Sharing anonymized statistics') : ''}
+          toggled={isTelemetryEnabled}
+          onClick={toggleTelemetry}
+        />
+      )}
     </Menu>
   );
 };
