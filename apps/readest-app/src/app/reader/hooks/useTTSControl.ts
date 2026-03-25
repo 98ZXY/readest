@@ -81,11 +81,7 @@ export const useTTSControl = ({ bookKey, onRequestHidePanel }: UseTTSControlProp
     const { title, author, coverImageUrl } = bookData.book;
 
     const handleNeedAuth = () => {
-      eventDispatcher.dispatch('toast', {
-        message: _('Please log in to use advanced TTS features'),
-        type: 'error',
-        timeout: 5000,
-      });
+      // Toast disabled for build
     };
 
     const handleSpeakMark = (e: Event) => {
